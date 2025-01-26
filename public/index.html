@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NGINX App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .endpoint {
+        background: #f4f4f4;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+      }
+      button {
+        padding: 8px 16px;
+        margin: 5px;
+        cursor: pointer;
+      }
+      #results {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>NGINX App</h1>
+    <p>This application demonstrates various NGINX capabilities:</p>
+    <ul>
+      <li>Web Server (Static Content)</li>
+      <li>Reverse Proxy</li>
+      <li>Load Balancer</li>
+      <li>API Gateway</li>
+      <li>Caching Server</li>
+      <li>SSL/TLS Termination</li>
+      <li>CDN</li>
+    </ul>
+
+    <h2>Test Endpoints</h2>
+    <div class="endpoint">
+      <button onclick="fetchData('/api/data')">Test Caching</button>
+      <button onclick="fetchData('/health')">Health Check</button>
+      <button onclick="fetchData('/api/service1')">Service 1</button>
+      <button onclick="fetchData('/api/service2')">Service 2</button>
+    </div>
+
+    <div id="results">
+      <h3>Results:</h3>
+      <pre id="output">Click any button to test the endpoints...</pre>
+    </div>
+
+    <script>
+      async function fetchData(endpoint) {
+        const output = document.getElementById("output");
+        try {
+          const response = await fetch(endpoint);
+          const data = await response.json();
+          output.textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+          output.textContent = "Error: " + error.message;
+        }
+      }
+    </script>
+  </body>
+</html>
